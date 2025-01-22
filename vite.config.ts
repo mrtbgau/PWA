@@ -35,7 +35,7 @@ export default defineConfig({
         background_color: "#ffffff",
       },
       workbox: {
-        globPatterns: ["**/*.{ts,css,html,ico,png,svg}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\.*/i,
