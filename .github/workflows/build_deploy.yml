@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
     
@@ -15,13 +15,20 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '20'
-    
+
     - name: Install Dependencies
       run: npm install
-    
+
     - name: Build Project
       run: npm run build
-    
+
+    - name: Disable Strict Host Key Checking
+      run: |
+        mkdir -p ~/.ssh
+        echo "Host *" > ~/.ssh/config
+        echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
+
     - name: Deploy to VPS
       uses: appleboy/ssh-action@v1.2.0
       with:
@@ -31,4 +38,4 @@ jobs:
         script: |
           cd /var/www/PWA
           rm -rf *
-          scp -r ${{ github.workspace }}/dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:/var/www/PWA/
+          cp -r $GITHUB_WORKSPACE/dist/* /var/www/PWA/
