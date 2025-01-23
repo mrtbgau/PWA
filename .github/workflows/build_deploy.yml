@@ -27,8 +27,14 @@ jobs:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
+        port: 22
         script: |
           cd /var/www/PWA
           rm -rf *
+          mkdir -p /var/www/PWA
           cp -r ${{ github.workspace }}/dist/* /var/www/PWA/
           sudo systemctl restart nginx
+    - name: Debug SSH
+      run: |
+        ssh-keygen -R ${{ secrets.VPS_HOST }}
+        ssh-keyscan -t rsa ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
