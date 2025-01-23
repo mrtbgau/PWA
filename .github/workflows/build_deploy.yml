@@ -26,6 +26,11 @@ jobs:
     - name: Build Project
       run: pnpm run build
 
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
     - name: Disable Strict Host Key Checking
       run: |
         mkdir -p ~/.ssh
@@ -34,13 +39,5 @@ jobs:
         chmod 600 ~/.ssh/config
 
     - name: Deploy to VPS
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        script: |
-          cd /var/www/PWA
-          rm -rf *
-          mkdir -p /var/www/PWA
-          cp -r $GITHUB_WORKSPACE/dist/* /var/www/PWA/
+      run: |
+        scp -r dist/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:/var/www/PWA/
