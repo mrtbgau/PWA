@@ -21,14 +21,18 @@ jobs:
     - name: Build Project
       run: npm run build
     
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
     - name: Deploy to VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        script: |
-          cd /var/www/PWA
-          rm -rf *
-          cp -r ${{ github.workspace }}/dist/* /var/www/PWA/
-          sudo systemctl restart nginx
+      run: |
+        ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+        cd /var/www/PWA
+        rm -rf *
+        cp -r ${{ github.workspace }}/dist/* /var/www/PWA/
+        sudo systemctl restart nginx
+        EOF
