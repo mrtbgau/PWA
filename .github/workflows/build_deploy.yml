@@ -16,10 +16,10 @@ jobs:
         node-version: '20'
     
     - name: Install Dependencies
-      run: pnpm ci
+      run: npm ci
     
     - name: Build Project
-      run: pnpm run build
+      run: npm run build
     
     - name: Deploy to VPS
       uses: appleboy/ssh-action@master
