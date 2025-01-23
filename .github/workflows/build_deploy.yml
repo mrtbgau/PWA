@@ -10,17 +10,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
 
+    - name: Setup pnpm
+      run: |
+        npm install -g pnpm
+
     - name: Install Dependencies
-      run: npm install
+      run: pnpm install
 
     - name: Build Project
-      run: npm run build
+      run: pnpm run build
 
     - name: Disable Strict Host Key Checking
       run: |
@@ -38,4 +42,5 @@ jobs:
         script: |
           cd /var/www/PWA
           rm -rf *
+          mkdir -p /var/www/PWA
           cp -r $GITHUB_WORKSPACE/dist/* /var/www/PWA/
