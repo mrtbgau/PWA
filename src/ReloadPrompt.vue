@@ -12,7 +12,7 @@ async function close() {
 <template>
   <div
     v-if="offlineReady || needRefresh"
-    class="fixed right-0 bottom-0 m-4 p-3 border border-solid border-gray-600 rounded-sm z-1 text-left shadow-sm bg-white"
+    class="fixed right-0 bottom-0 z-1 m-4 rounded-sm border border-solid border-gray-600 bg-white p-3 text-left shadow-sm"
     role="alert"
   >
     <div class="mb-2">
@@ -22,14 +22,14 @@ async function close() {
       </span>
     </div>
     <button
-      class="border border-solid border-gray-600 outline-none mr-1 rounded-xs py-1 px-2.5"
+      class="mr-1 rounded-xs border border-solid border-gray-600 px-2.5 py-1 outline-none"
       v-if="needRefresh"
       @click="updateServiceWorker()"
     >
       Reload
     </button>
     <button
-      class="border border-solid border-gray-600 outline-none mr-1 rounded-xs py-1 px-2.5"
+      class="mr-1 rounded-xs border border-solid border-gray-600 px-2.5 py-1 outline-none"
       @click="close"
     >
       Close
