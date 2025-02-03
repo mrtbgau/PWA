@@ -14,6 +14,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.1
         version: 4.0.1(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(lightningcss@1.29.1)(terser@5.37.0)(yaml@2.7.0))
+      lucide-vue-next:
+        specifier: ^0.474.0
+        version: 0.474.0(vue@3.5.13(typescript@5.6.3))
       tailwindcss:
         specifier: ^4.0.1
         version: 4.0.1
@@ -1704,6 +1707,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-vue-next@0.474.0:
+    resolution: {integrity: sha512-bQaSBjfJ33xiPQCxCf4JD3rcUgZFgWZzxSY8SScNa4Mcq2vWGlbvQx6icTL1UXRqsxzfoT13RXawePSmgg4iWw==}
+    peerDependencies:
+      vue: '>=3.0.1'
 
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
@@ -4062,6 +4070,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-vue-next@0.474.0(vue@3.5.13(typescript@5.6.3)):
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
 
   magic-string@0.25.9:
     dependencies:
