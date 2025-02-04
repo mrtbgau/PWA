@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import TheCamera from "../components/camera/TheCamera.vue";
-import TheMap from "../components/TheMap.vue";
+import Map from "../views/Map.vue";
 
 const routes = [
+  { path: "/location", component: Map },
   { path: "/camera", component: TheCamera },
-  { path: "/location", component: TheMap },
 ];
 
 const router = createRouter({
