@@ -13,7 +13,8 @@ const mapContainer = shallowRef<HTMLElement | null>(null);
 const map = shallowRef<Map | null>(null);
 
 onMounted(() => {
-  config.apiKey = "VSYaC1pg0fNxelCb3b1s";
+  config.apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
+  console.log(config.apiKey);
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
