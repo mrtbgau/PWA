@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRegisterSW } from "virtual:pwa-register/vue";
+import BaseButton from "./components/UI/BaseButton.vue";
 
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
@@ -16,24 +17,15 @@ async function close() {
     role="alert"
   >
     <div class="mb-2">
-      <span v-if="offlineReady"> App ready to work offline </span>
+      <span v-if="offlineReady"
+        >Application prête à fonctionner hors-ligne</span
+      >
       <span v-else>
         Nouveau contenu disponible, cliquez sur le bouton « Recharger » pour
         mettre à jour.
       </span>
     </div>
-    <button
-      class="mr-1 rounded-xs border-3 border-solid border-violet-500 px-2.5 py-1 outline-none"
-      v-if="needRefresh"
-      @click="updateServiceWorker()"
-    >
-      Recharger
-    </button>
-    <button
-      class="mr-1 rounded-xs border-3 border-solid border-violet-500 px-2.5 py-1 outline-none"
-      @click="close"
-    >
-      Fermer
-    </button>
+    <BaseButton :onClick="updateServiceWorker">Recharger</BaseButton>
+    <BaseButton :onClick="close">Fermer</BaseButton>
   </div>
 </template>
