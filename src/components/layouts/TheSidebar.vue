@@ -1,9 +1,8 @@
 <template>
   <nav
-    class="flex h-screen flex-col bg-[#0F0F13] text-white transition-all duration-300 ease-in-out"
+    class="flex h-screen flex-col bg-black text-white transition-all duration-300 ease-in-out"
     :class="[isCollapsed ? 'w-16' : 'w-64']"
   >
-    <!-- Header -->
     <div class="flex items-center p-4">
       <h1
         class="mr-auto text-xl font-semibold transition-opacity duration-300"
@@ -11,74 +10,44 @@
       >
         PWA
       </h1>
-      <button
-        @click="toggleSidebar"
-        class="rounded-lg p-2 transition-colors hover:bg-white/10"
-      >
+      <BaseButton :onClick="toggleSidebar" inverted>
         <ChevronsLeft
           :class="{ 'rotate-180': isCollapsed }"
           class="h-5 w-5 transition-transform duration-300"
-        />
-      </button>
+      /></BaseButton>
     </div>
 
-    <!-- Navigation Links -->
     <div class="flex-grow space-y-2 px-3 py-4">
-      <!-- Home -->
-      <a
-        href="#"
-        class="flex items-center gap-3 rounded-lg p-3 text-purple-500 transition-colors hover:bg-white/5"
-      >
-        <Home class="h-5 w-5" />
-        <span :class="{ hidden: isCollapsed }">Home</span>
-      </a>
-
-      <a
-        href="/location"
-        class="flex items-center gap-3 rounded-lg p-3 text-gray-300 transition-colors hover:bg-white/5"
-      >
-        <MapPin class="h-5 w-5" />
-        <span :class="{ hidden: isCollapsed }">Géolocalisation</span>
-      </a>
-
-      <a
-        href="/camera"
-        class="flex items-center gap-3 rounded-lg p-3 text-gray-300 transition-colors hover:bg-white/5"
-      >
-        <Camera class="h-5 w-5" />
-        <span :class="{ hidden: isCollapsed }">Caméra</span>
-      </a>
-
-      <a
-        href="#"
-        class="flex items-center gap-3 rounded-lg p-3 text-gray-300 transition-colors hover:bg-white/5"
-      >
-        <MessagesSquare class="h-5 w-5" />
-        <span :class="{ hidden: isCollapsed }">Chat</span>
-      </a>
+      <BaseNavLink
+        v-for="route in routes"
+        :key="route.path"
+        :to="route.path"
+        :icon="route.meta.icon"
+        :label="route.meta.label"
+        :is-collapsed="isCollapsed"
+      />
     </div>
   </nav>
 </template>
 
 <script setup>
 import {
-  Calendar,
   Camera,
-  ChevronDown,
   ChevronsLeft,
   Home,
-  LayoutGrid,
-  ListTodo,
   MapPin,
   MessagesSquare,
-  Plus,
-  User,
 } from "lucide-vue-next";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import BaseButton from "../UI/BaseButton.vue";
+import BaseNavLink from "../UI/BaseNavLink.vue";
 
 const isCollapsed = ref(false);
 const isCreateOpen = ref(false);
 const isTodoOpen = ref(false);
+
+const routes = useRouter().options.routes;
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
