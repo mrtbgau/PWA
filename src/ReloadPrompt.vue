@@ -12,27 +12,28 @@ async function close() {
 <template>
   <div
     v-if="offlineReady || needRefresh"
-    class="fixed right-0 bottom-0 z-1 m-4 rounded-sm border border-solid border-gray-600 bg-white p-3 text-left shadow-sm"
+    class="fixed top-0 right-0 z-1 m-4 rounded-sm border-3 border-solid border-violet-500 bg-black p-3 text-left text-white shadow-sm"
     role="alert"
   >
     <div class="mb-2">
       <span v-if="offlineReady"> App ready to work offline </span>
       <span v-else>
-        New content available, click on reload button to update.
+        Nouveau contenu disponible, cliquez sur le bouton « Recharger » pour
+        mettre à jour.
       </span>
     </div>
     <button
-      class="mr-1 rounded-xs border border-solid border-gray-600 px-2.5 py-1 outline-none"
+      class="mr-1 rounded-xs border-3 border-solid border-violet-500 px-2.5 py-1 outline-none"
       v-if="needRefresh"
       @click="updateServiceWorker()"
     >
-      Reload
+      Recharger
     </button>
     <button
-      class="mr-1 rounded-xs border border-solid border-gray-600 px-2.5 py-1 outline-none"
+      class="mr-1 rounded-xs border-3 border-solid border-violet-500 px-2.5 py-1 outline-none"
       @click="close"
     >
-      Close
+      Fermer
     </button>
   </div>
 </template>
