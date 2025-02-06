@@ -29,7 +29,7 @@
       />
     </div>
     <div class="absolute bottom-5 left-0">
-      <TheBattery />
+      <TheBattery v-if="!isCollapsed" />
     </div>
   </nav>
 </template>
