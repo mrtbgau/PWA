@@ -2,14 +2,13 @@
   <div>
     <video ref="videoElement" autoplay muted playsinline></video>
     <button @click="takePhoto">Prendre une photo</button>
-    <canvas ref="canvasElement" style="display: none"></canvas>
-    <img v-if="photoData" :src="photoData" alt="Captured photo" />
+    <canvas ref="canvasElement" hidden></canvas>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStorage } from "@vueuse/core";
+import { useStorage, useWebNotification } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 
 const videoElement = ref<HTMLVideoElement | null>(null);
@@ -18,6 +17,8 @@ const photoData = ref<string | null>(null);
 const errorMessage = ref<string | null>(null);
 
 const photoList = useStorage<string[]>("photo-list", []);
+
+const { isSupported, show } = useWebNotification();
 
 const getMediaStream = async (): Promise<MediaStream> => {
   return await navigator.mediaDevices.getUserMedia({
@@ -52,6 +53,17 @@ const takePhoto = () => {
     drawCanvas(canvasElement.value, videoElement.value);
     photoData.value = canvasElement.value.toDataURL("image/png");
     photoList.value = [...photoList.value, photoData.value];
+    if (isSupported) {
+      show({
+        title: "Photo Capturée 📸",
+        body: "Une nouvelle photo a été ajoutée à votre galerie.",
+        icon: photoData.value,
+      });
+    } else {
+      console.warn(
+        "Les notifications web ne sont pas supportées par ce navigateur.",
+      );
+    }
   }
 };
 
