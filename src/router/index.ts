@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import { Camera, MapPin } from "lucide-vue-next";
+import { Camera, Images, MapPin } from "lucide-vue-next";
 import TheCamera from "../components/camera/TheCamera.vue";
+import TheGallery from "../components/camera/TheGallery.vue";
 import Map from "../views/Map.vue";
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: "/camera",
     component: TheCamera,
     meta: { label: "Caméra", icon: Camera },
+  },
+  {
+    path: "/gallery",
+    component: TheGallery,
+    meta: { label: "Galerie", icon: Images },
   },
 ];
 
