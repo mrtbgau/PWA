@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Call from "./components/Call.vue";
 import TheSideBar from "./components/layouts/TheSidebar.vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 </script>
@@ -10,5 +11,6 @@ import ReloadPrompt from "./ReloadPrompt.vue";
       <TheSideBar />
       <router-view />
     </div>
+    <Call />
   </main>
 </template>
