@@ -10,6 +10,7 @@
       >
         PWA
       </h1>
+
       <BaseButton :onClick="toggleSidebar" inverted>
         <ChevronsLeft
           :class="{ 'rotate-180': isCollapsed }"
@@ -27,6 +28,9 @@
         :is-collapsed="isCollapsed"
       />
     </div>
+    <div class="absolute bottom-5 left-0">
+      <TheBattery />
+    </div>
   </nav>
 </template>
 
@@ -42,6 +46,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import BaseButton from "../UI/BaseButton.vue";
 import BaseNavLink from "../UI/BaseNavLink.vue";
+import TheBattery from "../battery/TheBattery.vue";
 
 const isCollapsed = ref(false);
 const isCreateOpen = ref(false);
@@ -51,17 +56,5 @@ const routes = useRouter().options.routes;
 
 const toggleSidebar = () => {
   isCollapsed.value = !isCollapsed.value;
-};
-
-const toggleCreate = () => {
-  if (!isCollapsed.value) {
-    isCreateOpen.value = !isCreateOpen.value;
-  }
-};
-
-const toggleTodo = () => {
-  if (!isCollapsed.value) {
-    isTodoOpen.value = !isTodoOpen.value;
-  }
 };
 </script>
