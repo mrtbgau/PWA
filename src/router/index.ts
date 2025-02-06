@@ -25,7 +25,7 @@ const routes = [
   {
     path: "/phone-call",
     component: Call,
-    meta: { label: "Appel téléphonique", icon: Phone },
+    meta: { label: "Appel", icon: Phone },
   },
 ];
 
