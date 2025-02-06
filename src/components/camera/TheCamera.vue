@@ -9,12 +9,15 @@
 </template>
 
 <script setup lang="ts">
+import { useStorage } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 
 const videoElement = ref<HTMLVideoElement | null>(null);
 const canvasElement = ref<HTMLCanvasElement | null>(null);
 const photoData = ref<string | null>(null);
 const errorMessage = ref<string | null>(null);
+
+const photoList = useStorage<string[]>("photo-list", []);
 
 const getMediaStream = async (): Promise<MediaStream> => {
   return await navigator.mediaDevices.getUserMedia({
@@ -48,6 +51,7 @@ const takePhoto = () => {
   if (videoElement.value && canvasElement.value) {
     drawCanvas(canvasElement.value, videoElement.value);
     photoData.value = canvasElement.value.toDataURL("image/png");
+    photoList.value = [...photoList.value, photoData.value];
   }
 };
 
