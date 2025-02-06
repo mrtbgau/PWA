@@ -1,52 +1,25 @@
 <template>
-  <div>
-    <label for="phoneNumber">Entrez un numéro de téléphone :</label>
+  <div class="flex flex-col items-center gap-4">
+    <label for="phoneInput" class="mb-2 text-2xl font-bold text-gray-700">
+      Entrez un numéro de téléphone :
+    </label>
     <input
+      id="phoneInput"
       type="tel"
-      id="phoneNumber"
       v-model="phoneNumber"
-      placeholder="Ex: 0123456789"
+      class="rounded-md border-3 border-gray-300 p-2 shadow-sm focus:border-violet-500 focus:ring-violet-500 focus:outline-none"
     />
-    <button @click="makePhoneCall">Passer l'appel</button>
+    <BaseButton @click="makePhoneCall">Appeler</BaseButton>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      phoneNumber: "",
-    };
-  },
-  methods: {
-    makePhoneCall() {
-      if (this.phoneNumber) {
-        window.location.href = `tel:${this.phoneNumber}`;
-      } else {
-        alert("Veuillez entrer un numéro de téléphone valide.");
-      }
-    },
-  },
+<script setup lang="ts">
+import { ref } from "vue";
+import BaseButton from "./UI/BaseButton.vue";
+
+const phoneNumber = ref<string>("");
+
+const makePhoneCall = () => {
+  window.location.href = `tel:${phoneNumber.value}`;
 };
 </script>
-
-<style scoped>
-/* Ajoutez des styles ici si nécessaire */
-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-input {
-  margin: 10px 0;
-  padding: 8px;
-  width: 200px;
-}
-
-button {
-  padding: 10px 20px;
-  cursor: pointer;
-}
-</style>

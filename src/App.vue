@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Call from "./components/Call.vue";
 import TheSideBar from "./components/layouts/TheSidebar.vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 </script>
@@ -7,10 +6,11 @@ import ReloadPrompt from "./ReloadPrompt.vue";
 <template>
   <ReloadPrompt />
   <main>
-    <div class="flex h-screen">
+    <div class="flex h-screen items-center">
       <TheSideBar />
-      <router-view />
+      <div class="flex flex-1 items-center justify-center">
+        <router-view />
+      </div>
     </div>
-    <Call />
   </main>
 </template>

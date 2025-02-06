@@ -1,10 +1,10 @@
 <template>
   <button
     :class="[
-      'mr-1 cursor-pointer rounded-xs px-2.5 py-1 outline-none',
+      'mr-1 cursor-pointer rounded-lg px-2.5 py-1 text-white outline-none',
       inverted
-        ? 'text-white hover:bg-white/15'
-        : 'border-3 border-solid border-violet-500 bg-black text-violet-500 hover:bg-violet-500 hover:text-black',
+        ? 'border-none hover:bg-white/15'
+        : 'border-3 border-solid border-violet-500 bg-violet-500 hover:border-violet-700 hover:bg-violet-700',
     ]"
     @click="onClick"
   >
