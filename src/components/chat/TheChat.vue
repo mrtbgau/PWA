@@ -1,25 +1,6 @@
-<!-- <template>
-  <div class="w-full">
-    <h1 class="text-center text-2xl font-bold">
-      Bienvenue dans le chat, {{ pseudo }}
-    </h1>
-    <div class="bg-opacity-10 flex flex-row gap-4 bg-black p-4">
-      <input
-        type="text"
-        class="w-full rounded-md border-3 border-gray-300 p-2 shadow-sm focus:border-violet-500 focus:ring-violet-500 focus:outline-none"
-      />
-      <BaseButton @click="sendMessage">Envoyer</BaseButton>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import BaseButton from "../UI/BaseButton.vue";
-const props = defineProps<{ pseudo: string }>();
-</script> -->
 <template>
   <div class="w-full">
-    <h1 class="text-center text-2xl font-bold">
+    <h1 class="mb-20 text-center text-2xl font-bold">
       Bienvenue dans le chat, {{ pseudo }}
     </h1>
     <div
@@ -33,21 +14,20 @@ const props = defineProps<{ pseudo: string }>();
         }}</small>
       </div>
     </div>
-
-    <!-- Input pour envoyer des messages -->
-    <div class="bg-opacity-10 flex gap-4 rounded-md bg-gray-300 p-4 shadow-lg">
+    <div class="flex gap-4 p-4">
       <input
         v-model="txtChat"
         type="text"
         placeholder="Tapez votre message..."
-        class="w-full rounded-md border-2 border-gray-300 p-2 shadow-sm focus:border-violet-500 focus:ring-violet-500 focus:outline-none"
+        class="w-full rounded-md border-3 border-gray-300 p-2 shadow-sm focus:border-violet-500 focus:ring-violet-500 focus:outline-none"
       />
-      <BaseButton @click="sendMessage">Envoyer</BaseButton>
+      <BaseButton @click="sendMessage"><SendHorizontal /></BaseButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { SendHorizontal } from "lucide-vue-next";
 import io from "socket.io-client";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import BaseButton from "../UI/BaseButton.vue";
