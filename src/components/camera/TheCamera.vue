@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <video ref="videoElement" autoplay muted playsinline></video>
-    <button @click="takePhoto">Prendre une photo</button>
+  <div class="flex flex-col items-center gap-4">
+    <video
+      class="rounded-3xl"
+      ref="videoElement"
+      autoplay
+      muted
+      playsinline
+    ></video>
+    <BaseButton @click="takePhoto">Prendre une photo</BaseButton>
     <canvas ref="canvasElement" hidden></canvas>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
@@ -10,6 +16,7 @@
 <script setup lang="ts">
 import { useStorage, useWebNotification } from "@vueuse/core";
 import { onMounted, ref } from "vue";
+import BaseButton from "../UI/BaseButton.vue";
 
 const videoElement = ref<HTMLVideoElement | null>(null);
 const canvasElement = ref<HTMLCanvasElement | null>(null);

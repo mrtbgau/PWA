@@ -8,7 +8,7 @@ import ReloadPrompt from "./ReloadPrompt.vue";
   <main>
     <div class="flex h-screen items-center">
       <TheSideBar />
-      <div class="flex flex-1 items-center justify-center">
+      <div class="flex flex-1 items-center justify-center overflow-y-auto">
         <router-view />
       </div>
     </div>

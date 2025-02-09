@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <div v-if="photoList.length">
-      <div v-for="(photo, index) in photoList" :key="index" class="photo-item">
-        <img :src="photo" alt="Photo sauvegardée" />
-        <button @click="deletePhoto(index)">Supprimer</button>
+  <div class="h-full overflow-y-auto">
+    <div class="grid grid-cols-3 gap-5" v-if="photoList.length">
+      <div
+        v-for="(photo, index) in photoList"
+        :key="index"
+        class="flex flex-col items-center gap-4"
+      >
+        <img class="w-75 rounded-3xl" :src="photo" alt="Photo sauvegardée" />
+        <BaseButton @click="deletePhoto(index)">Supprimer</BaseButton>
       </div>
     </div>
     <p v-else>Aucune photo enregistrée.</p>
@@ -12,6 +16,7 @@
 
 <script setup lang="ts">
 import { useStorage } from "@vueuse/core";
+import BaseButton from "../UI/BaseButton.vue";
 
 const photoList = useStorage<string[]>("photo-list", []);
 
