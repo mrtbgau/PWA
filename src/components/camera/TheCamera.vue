@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStorage, useWebNotification } from "@vueuse/core";
+import { useStorage, useWebNotification, useVibrate } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 import BaseButton from "../UI/BaseButton.vue";
 
@@ -26,6 +26,7 @@ const errorMessage = ref<string | null>(null);
 const photoList = useStorage<string[]>("photo-list", []);
 
 const { isSupported, show } = useWebNotification();
+const { vibrate, isSupported } = useVibrate({ pattern: [300, 100, 300] });
 
 const getMediaStream = async (): Promise<MediaStream> => {
   return await navigator.mediaDevices.getUserMedia({
@@ -60,10 +61,8 @@ const takePhoto = () => {
     drawCanvas(canvasElement.value, videoElement.value);
     photoData.value = canvasElement.value.toDataURL("image/png");
     photoList.value = [...photoList.value, photoData.value];
-    if (navigator.vibrate) {
-      navigator.vibrate(200);
-    }
     if (isSupported) {
+      vibrate();
       show({
         title: "Photo Capturée 📸",
         body: "Une nouvelle photo a été ajoutée à votre galerie.",
