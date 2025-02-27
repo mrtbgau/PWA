@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import { Camera, Images, MapPin, MessagesSquare, Phone } from "lucide-vue-next";
+import { Camera, Images, MapPin, Phone } from "lucide-vue-next";
 import Call from "../components/Call.vue";
 import TheCamera from "../components/camera/TheCamera.vue";
 import TheGallery from "../components/camera/TheGallery.vue";
-import Chat from "../views/Chat.vue";
 import Map from "../views/Map.vue";
 
 const routes = [
@@ -27,11 +26,6 @@ const routes = [
     path: "/phone-call",
     component: Call,
     meta: { label: "Appel", icon: Phone },
-  },
-  {
-    path: "/chat",
-    component: Chat,
-    meta: { label: "Chat", icon: MessagesSquare },
   },
 ];
 
