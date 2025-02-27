@@ -25,8 +25,10 @@ const errorMessage = ref<string | null>(null);
 
 const photoList = useStorage<string[]>("photo-list", []);
 
-const { isSupported, show } = useWebNotification();
-const { vibrate, isSupported } = useVibrate({ pattern: [300, 100, 300] });
+const { isSupported: isNotificationSupported, show } = useWebNotification();
+const { vibrate, isSupported: isVibrateSupported } = useVibrate({
+  pattern: [300, 100, 300],
+});
 
 const getMediaStream = async (): Promise<MediaStream> => {
   return await navigator.mediaDevices.getUserMedia({
@@ -61,13 +63,15 @@ const takePhoto = () => {
     drawCanvas(canvasElement.value, videoElement.value);
     photoData.value = canvasElement.value.toDataURL("image/png");
     photoList.value = [...photoList.value, photoData.value];
-    if (isSupported) {
-      vibrate();
+    if (isNotificationSupported) {
       show({
         title: "Photo Capturée 📸",
         body: "Une nouvelle photo a été ajoutée à votre galerie.",
         icon: photoData.value,
       });
+      if (isVibrateSupported) {
+        vibrate();
+      }
     } else {
       console.warn(
         "Les notifications web ne sont pas supportées par ce navigateur.",
