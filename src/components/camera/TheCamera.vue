@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStorage, useWebNotification, useVibrate } from "@vueuse/core";
+import { useStorage, useWebNotification } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 import BaseButton from "../UI/BaseButton.vue";
 
