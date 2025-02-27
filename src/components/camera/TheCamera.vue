@@ -66,7 +66,7 @@ const takePhoto = () => {
         body: "Une nouvelle photo a été ajoutée à votre galerie.",
         icon: photoData.value,
       });
-      vibrate({ pattern: [200] });
+      useVibrate({ pattern: [200] });
     } else {
       console.warn(
         "Les notifications web ne sont pas supportées par ce navigateur.",
