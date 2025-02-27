@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStorage, useWebNotification } from "@vueuse/core";
+import { useStorage, useWebNotification, useVibrate } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 import BaseButton from "../UI/BaseButton.vue";
 
@@ -66,7 +66,7 @@ const takePhoto = () => {
         body: "Une nouvelle photo a été ajoutée à votre galerie.",
         icon: photoData.value,
       });
-      navigator.vibrate(200);
+      vibrate({ pattern: [200] });
     } else {
       console.warn(
         "Les notifications web ne sont pas supportées par ce navigateur.",
