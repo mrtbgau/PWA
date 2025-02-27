@@ -13,7 +13,7 @@ async function close() {
 <template>
   <div
     v-if="offlineReady || needRefresh"
-    class="fixed top-0 right-0 z-1 m-4 rounded-lg border-3 border-solid border-violet-500 p-3 text-left text-black"
+    class="background-white fixed top-0 right-0 z-1 m-4 rounded-lg border-3 border-solid border-violet-500 p-3 text-left text-black"
     role="alert"
   >
     <div class="mb-2">
