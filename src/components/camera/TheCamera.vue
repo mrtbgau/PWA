@@ -60,13 +60,15 @@ const takePhoto = () => {
     drawCanvas(canvasElement.value, videoElement.value);
     photoData.value = canvasElement.value.toDataURL("image/png");
     photoList.value = [...photoList.value, photoData.value];
+    if (navigator.vibrate) {
+      navigator.vibrate(200);
+    }
     if (isSupported) {
       show({
         title: "Photo Capturée 📸",
         body: "Une nouvelle photo a été ajoutée à votre galerie.",
         icon: photoData.value,
       });
-      useVibrate({ pattern: [200] });
     } else {
       console.warn(
         "Les notifications web ne sont pas supportées par ce navigateur.",
