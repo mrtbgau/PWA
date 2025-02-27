@@ -30,7 +30,7 @@ const { isSupported, show } = useWebNotification();
 const getMediaStream = async (): Promise<MediaStream> => {
   return await navigator.mediaDevices.getUserMedia({
     video: true,
-    audio: true,
+    audio: false,
   });
 };
 
@@ -41,7 +41,7 @@ const setupMediaStream = async () => {
       videoElement.value.srcObject = stream;
     }
   } catch (error) {
-    errorMessage.value = "Impossible d'accéder à la caméra ou au micro.";
+    errorMessage.value = "Impossible d'accéder à la caméra";
     console.error("Erreur lors de l'accès au flux média :", error);
   }
 };
