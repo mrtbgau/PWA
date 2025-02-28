@@ -1,7 +1,7 @@
 <template>
   <div class="mt-6">
     <p class="mb-2 text-gray-700">
-      Rejoignez la call depuis une nouvelle fenêtre ou un nouveau navigateur
+      Rejoignez la call depuis une nouvelle fenêtre google
     </p>
     <div class="flex items-center">
       <input
