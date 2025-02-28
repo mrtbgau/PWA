@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import { Camera, Images, MapPin, Phone } from "lucide-vue-next";
+import { Camera, Images, MapPin, Phone, Video } from "lucide-vue-next";
 import Call from "../components/Call.vue";
 import TheCamera from "../components/camera/TheCamera.vue";
 import TheGallery from "../components/camera/TheGallery.vue";
 import Map from "../views/Map.vue";
+import WebRTC from "../views/WebRTC.vue";
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: "/phone-call",
     component: Call,
     meta: { label: "Appel", icon: Phone },
+  },
+  {
+    path: "/video-call",
+    component: WebRTC,
+    meta: { label: "Appel vidéo", icon: Video },
   },
 ];
 
